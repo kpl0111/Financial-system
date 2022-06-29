@@ -34,3 +34,6 @@ class dbs:
             for i in self.stafflist:
                 if i.uid == uid:
                     return i
+
+    def write_back(self):
+        pass
