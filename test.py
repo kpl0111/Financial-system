@@ -1,5 +1,7 @@
-import user_sys as us
+from user_sys import *
 
-a = us.manager()
+a, b = staff(), staff()
 
-print(a)
+#print(a.tostr())
+#print(b.tostr())
+print(a == b)
