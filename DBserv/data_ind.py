@@ -1,5 +1,0 @@
-dir_root = './Data/'
-dir_staff = '/staff.dat'
-dir_DBA = '/dba.dat'
-dir_manager = '/manager.dat'
-dir_cashier = '/cashier.dat'
