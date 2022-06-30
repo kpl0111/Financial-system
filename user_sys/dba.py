@@ -23,8 +23,11 @@ class dba(user):
             tmp.fromstr(nitem)
         return tdbs.add(tmp)
 
-    def reset_acc(self, uid, tag_usr):
+    def reset_acc(self, uid, tag_usr, tdbs):
         if uid != tag_usr:
             return None
         tag_usr.pwd = 'passwd'
         return tag_usr
+
+    def del_acc(self, uid, utype, tdbs):
+        pass 

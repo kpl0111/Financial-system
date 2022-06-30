@@ -6,6 +6,7 @@ class model:
     def __init__(self):
         self.usr = None
         self.db = dbs()
+        self.salary_list = None
 
     def login(self, uid, pwd, utype):
         if utype == 'dba':
@@ -26,6 +27,9 @@ class model:
         assert type(self.usr) == cashier, 'user module type error\n' 
         tmp = self.usr.commit_transaction(tid, mdf)
         self.db.add_transaction(tmp)
+
+    def settle(self):
+        pass
 
     def query_salary(self):
         pass
