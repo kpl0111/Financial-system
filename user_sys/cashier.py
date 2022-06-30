@@ -1,5 +1,9 @@
-from user_sys.user import user
+from user_sys.FM import FM
+from table_sys import tra_rec
 
-class cashier(user):
+class cashier(FM):
     def __init__(self) -> None:
         super().__init__()
+    
+    def commit_transaction(self, tid, mdf):
+        return tra_rec(self.sid, tid, mdf)
