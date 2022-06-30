@@ -29,6 +29,7 @@ def manager(tmd):
 
     def get_report():
         tmp = tmd.analysis()
+        t2.delete('1.0', 'end')
         t2.insert('end', tmp.printstr())
 
     def archive_season():
@@ -42,6 +43,11 @@ def manager(tmd):
         UI.log_panel.log_panel(tmd)
         return
 
+    def sec_exit():
+        tmd.logout()
+        window.quit()
+    
+    window.protocol('WM_DELETE_WINDOW', sec_exit)
     but0 = tk.Button(window, text="改变基础薪资", width=10, height=2, command=modify_salary_base)
     but0.pack()
     but1 = tk.Button(window, text="薪资季度结算", width=10, height=2, command=settle_season)
@@ -52,4 +58,4 @@ def manager(tmd):
     but3.pack()
     but4 = tk.Button(window, text="退出", width=10, height=2, command=enroll_back)
     but4.pack()
-    window.mainloop()  # 结束（不停循环刷新）
+    #window.mainloop()  # 结束（不停循环刷新）

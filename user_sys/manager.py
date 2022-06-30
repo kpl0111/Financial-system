@@ -18,7 +18,7 @@ class manager(FM):
         for i, j in enumerate(tdbs.stafflist):
             salary_list.append(salary_table())
             salary_list[i].sid = j.sid
-            salary_list[i].salary_base = j.salary
+            salary_list[i].salarybase = j.salary
             salary_list[i].final = j.salary
         for i, j in enumerate(tdbs.salary_recs):
             for k in range(len(salary_list)):

@@ -67,8 +67,8 @@ def log_panel(tmd):
     window.geometry('500x400')  # 窗口大小，小写字母x
     # 窗口的label
     k = tk.Label(window,
-                 textvar="用户名",  # 文本,可变换
-                 font=('Arial', 12),  # 字体和大小
+                 text="用户名",  # 文本,可变换
+                 font=('黑体', 12),  # 字体和大小
                  width=10, height=2  # 字体所占的宽度和高度
                  )
     k.pack()  # 固定窗口

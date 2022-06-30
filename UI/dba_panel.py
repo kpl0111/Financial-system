@@ -37,10 +37,15 @@ def dba(tmd):
         UI.log_panel.log_panel(tmd)
         return
 
+    def sec_exit():
+        tmd.logout()
+        window.quit()
+    
+    window.protocol('WM_DELETE_WINDOW', sec_exit)
     but1 = tk.Button(window, text="添加账户", width=10, height=2, command=add_account)
     but1.pack()
     but2 = tk.Button(window, text="重置账户密码", width=10, height=2, command=reset_acc)
     but2.pack()
     but3 = tk.Button(window, text="退出", width=10, height=2, command=enroll_back)
     but3.pack()
-    window.mainloop()  # 结束（不停循环刷新）
+    # window.mainloop()  # 结束（不停循环刷新）

@@ -16,7 +16,7 @@ def staff(tmd):
             t.insert('end', '目前尚未结算工资')
         else:
             t.delete('1.0', 'end')
-            t.insert('end', res.tostr())
+            t.insert('end', res.printstr())
 
     def enroll_back():
         window.destroy()
@@ -24,8 +24,13 @@ def staff(tmd):
         UI.log_panel.log_panel(tmd)
         return
 
+    def sec_exit():
+        tmd.logout()
+        window.quit()
+    
+    window.protocol('WM_DELETE_WINDOW', sec_exit)
     but1 = tk.Button(window, text='查询工资单', width=10, height=2, command=query_salary)
     but1.pack()
     but3 = tk.Button(window, text="退出", width=10, height=2, command=enroll_back)
     but3.pack()
-    window.mainloop()  # 结束（不停循环刷新）
+    #window.mainloop()  # 结束（不停循环刷新）
