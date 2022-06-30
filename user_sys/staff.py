@@ -5,6 +5,9 @@ class staff(user):
         super().__init__()
         self.name, self.sid, self.age, self.seniority, self.salary = 'empty', 'empty', -1, -1, -1
     
+    def get_salary_tb(self, tdbs):
+        pass
+
     def tostr(self):
         # print('fk')
         return super().tostr() + ' ' + self.sid + ' ' + self.name + ' '+ str(self.age) + ' ' + str(self.seniority) + ' ' + str(self.salary)
