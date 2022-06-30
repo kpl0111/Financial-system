@@ -64,7 +64,11 @@ class dbs:
                 tmp = salary_rec()
                 tmp.fromstr(item)
                 self.salary_recs.append(tmp)
-            
+        if len(self.dbalist) == 0:
+            tmp = dba()
+            tmp.fromstr('admin adminadmin dba')
+            self.dbalist.append(tmp)
+
     def item_for_check(self, uid, type):
         if type == 'staff':
             for i in self.stafflist:
