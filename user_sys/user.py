@@ -10,6 +10,8 @@ class user:
 
     def login(self, uid : string, pwd : string, tdbs, utype):
         checker = tdbs.item_for_check(uid, utype)
+        if checker == None:
+            return False
         if checker.uid == uid and checker.pwd == pwd:
             self.fromstr(checker.tostr())
             return True
@@ -20,6 +22,7 @@ class user:
         if oldpwd == self.pwd:
             self.pwd = newpwd
             tdbs.modify(self)
+            tdbs.write_back()
             return True
         else:
             return False        
@@ -32,4 +35,7 @@ class user:
         self.pwd = self.pwd[len(self.uid):]
 
     def __eq__(self, other):
-        return self.tostr() == other.tostr()
+        if type(other) == type(self):
+            return self.tostr() == other.tostr()
+        else:
+            return False

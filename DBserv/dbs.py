@@ -2,6 +2,7 @@ import enum
 import os
 from DBserv.data_ind import *
 from table_sys.salary_rec import salary_rec
+from table_sys.salary_table import salary_table
 from table_sys.tra_rec import tra_rec
 from user_sys import *
 
@@ -56,13 +57,13 @@ class dbs:
             for item in items:
                 tmp = tra_rec()
                 tmp.fromstr(item)
-                self.managerlist.append(tmp)
+                self.tra_recs.append(tmp)
         with open(dir_root+dir_sal, 'r') as f:
             items = f.readlines()
             for item in items:
                 tmp = salary_rec()
                 tmp.fromstr(item)
-                self.managerlist.append(tmp)
+                self.salary_recs.append(tmp)
             
     def item_for_check(self, uid, type):
         if type == 'staff':
@@ -105,15 +106,31 @@ class dbs:
             for i, j in enumerate(self.salary_recs):
                 f.write(j.tostr() + '\n')
         
-    def add(self, usr):
-        if usr.utype == 'staff':
+    def add(self, usr, utype):
+        if utype == 'staff':
+            for i in self.stafflist:
+                if i.uid == usr.uid or i.sid == usr.sid:
+                    return False
             self.stafflist.append(usr)
-        elif usr.utype == 'dba':
+            return True
+        elif utype == 'dba':
+            for i in self.dbalist:
+                if i.uid == usr.uid:
+                    return False
             self.dbalist.append(usr)
-        elif usr.utype == 'cashier':
+            return True
+        elif utype == 'cashier':
+            for i in self.cashierlist:
+                if i.uid == usr.uid or i.sid == usr.sid:
+                    return False
             self.cashierlist.append(usr)
-        else:
+            return True
+        elif utype == 'manager':
+            for i in self.managerlist:
+                if i.uid == usr.uid or i.sid == usr.sid:
+                    return False
             self.managerlist.append(usr)
+            return True
         return False
 
     def modify(self, usr):
@@ -140,7 +157,37 @@ class dbs:
         return False
 
     def add_transaction(self, rec):
+        for i in self.tra_recs:
+            if i.tid == rec.tid:
+                return False
         self.tra_recs.append(rec)
+        return True
 
     def add_salary_m(self, rec):
-        self.salary_recs.append(rec)
+        flag = False
+        for i in self.salary_recs:
+            if i.sid == rec.sid:
+                flag = True
+                break
+        if flag: 
+            self.salary_recs.append(rec)
+        return flag
+
+    def save_salary_table(self, salary_table):
+        with open(dir_root + dir_sal_tlb, 'w') as f:
+            for i in salary_table:
+                f.write(i.tostr() + '\n')
+    
+    def read_salary_table(self):
+        res = []
+        if not os.path.exists(dir_root + dir_sal_tlb):
+            return None
+        with open(dir_root + dir_sal_tlb, 'r') as f:
+            items = f.readlines()
+            for i in items:
+                tmp = salary_table()
+                tmp.fromstr(i)
+                res.append(tmp)
+        if len(res) > 0:
+            return res
+        return None

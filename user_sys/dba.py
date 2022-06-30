@@ -21,13 +21,30 @@ class dba(user):
         else:
             tmp = staff()
             tmp.fromstr(nitem)
-        return tdbs.add(tmp)
+        return tdbs.add(tmp, utype)
 
-    def reset_acc(self, uid, tag_usr, tdbs):
-        if uid != tag_usr:
-            return None
-        tag_usr.pwd = 'passwd'
-        return tag_usr
+    def reset_acc(self, uid, utype, tdbs):
+        if utype == 'dba':
+            for i,j in enumerate(tdbs.dbalist):
+                if j.uid == uid:
+                    tdbs.dbalist[i].pwd = 'passwd'
+                    return True
+        elif utype == 'cashier':
+            for i,j in enumerate(tdbs.cashierlist):
+                if j.uid == uid:
+                    tdbs.cashierlist[i].pwd = 'passwd'
+                    return True
+        elif utype == 'manager':
+            for i,j in enumerate(tdbs.managerlist):
+                if j.uid == uid:
+                    tdbs.managerlist[i].pwd = 'passwd'
+                    return True
+        else:
+            for i,j in enumerate(tdbs.stafflist):
+                if j.uid == uid:
+                    tdbs.stafflist[i].pwd = 'passwd'
+                    return True
+        return False
 
     def del_acc(self, uid, utype, tdbs):
         pass 
